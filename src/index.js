@@ -1,13 +1,11 @@
 import fs from "fs";
 import path from "path";
 import parse from "./parse.js";
+import comparer from "./comparer.js";
 
 const getFileType = (filePath) => path.extname(filePath).slice(1);
-
 const getFilePath = (filePath) => path.resolve(process.cwd(), filePath);
-
 const readFile = (filePath) => fs.readFileSync(getFilePath(filePath), "utf8");
-
 const dataParse = (filepath, ext) => parse(filepath, ext);
 
 export default (filePath1, filePath2) => {
@@ -21,5 +19,5 @@ export default (filePath1, filePath2) => {
   const data2 = readFile(path2);
   const parsedData2 = dataParse(data2, ext2);
 
-  return { parsedData1, parsedData2 };
+  return comparer(parsedData1, parsedData2);
 };
