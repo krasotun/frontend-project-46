@@ -1,12 +1,12 @@
-import YAML from "yaml";
+import YAML from 'yaml';
 
 export default (filepath, ext) => {
   switch (ext) {
-    case "json":
+    case 'json':
       return JSON.parse(filepath);
-    case "yaml":
+    case 'yaml':
       return YAML.parse(filepath);
-    case "yml":
+    case 'yml':
       return YAML.parse(filepath);
     default:
       throw new Error(`Unknown format ${ext}!`);
