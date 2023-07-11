@@ -1,3 +1,7 @@
+/* eslint-disable no-prototype-builtins */
+/* eslint-disable no-restricted-syntax */
+const generateString = (polar, key, value) => [polar, `${key}: ${value}`];
+
 export default (object1, object2) => {
   const result = [];
 
@@ -36,5 +40,3 @@ export default (object1, object2) => {
     .map((element) => element.join(' '))
     .join('\n');
 };
-
-const generateString = (polar, key, value) => [polar, `${key}: ${value}`];

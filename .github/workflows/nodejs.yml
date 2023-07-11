@@ -3,10 +3,11 @@ on: push
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps: # список шагов, которые надо выполнить
-      # экшен — выполняет какую-то задачу
-      # checkout — клонирует репозиторий
+    steps:
       - uses: actions/checkout@v3
-      # run – произвольная bash-команда
-      # ls -la выведет содержимое текущего репозитория
-      - run: ls -la
+      - name: Install dependencies
+        run: make install
+      - name: Lint application
+        run: make lint
+      - name: Test application
+        run: make test
