@@ -1,5 +1,3 @@
-/* eslint-disable no-prototype-builtins */
-/* eslint-disable no-restricted-syntax */
 const generateString = (polar, key, value) => [polar, `${key}: ${value}`];
 
 export default (object1, object2) => {
@@ -8,8 +6,8 @@ export default (object1, object2) => {
   const object1Keys = Object.keys(object1);
   const object2Keys = Object.keys(object2);
 
-  for (const key of object1Keys) {
-    if (object2.hasOwnProperty(key)) {
+  object1Keys.forEach((key) => {
+    if (Object.hasOwn(object2, key)) {
       if (object1[key] === object2[key]) {
         result.push(generateString(' ', key, object1[key]));
       } else {
@@ -19,13 +17,14 @@ export default (object1, object2) => {
     } else {
       result.push(generateString('-', key, object1[key]));
     }
-  }
+  });
 
-  for (const key of object2Keys) {
-    if (!object1.hasOwnProperty(key)) {
+  object2Keys.forEach((key) => {
+    if (!Object.hasOwn(object1, key)) {
       result.push(generateString('+', key, object2[key]));
     }
-  }
+  });
+
   return result
     .sort(([, keyA], [, keyB]) => {
       if (keyA < keyB) {
