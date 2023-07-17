@@ -24,18 +24,5 @@ export default (object1, object2) => {
       result.push(generateString('+', key, object2[key]));
     }
   });
-
-  return result
-    .sort(([, keyA], [, keyB]) => {
-      if (keyA < keyB) {
-        return -1;
-      }
-      if (keyA > keyB) {
-        return 1;
-      }
-
-      return 0;
-    })
-    .map((element) => element.join(' '))
-    .join('\n');
+  return result.map((element) => element.join(' ')).join('\n');
 };

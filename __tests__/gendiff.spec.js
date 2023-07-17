@@ -22,16 +22,48 @@ describe('#gendiff', () => {
   let filePath2;
   let expectedFile;
 
-  describe('JSON', () => {
+  describe('json', () => {
     beforeEach(() => {
       fileName1 = 'plain-json1.json';
       fileName2 = 'plain-json2.json';
       filePath1 = getFixturePath(fileName1);
       filePath2 = getFixturePath(fileName2);
 
-      expectedFile = readFile('expected-plain-json.txt');
+      expectedFile = readFile('expected-plain.txt');
     });
-    it('should compare plain JSON files', () => {
+    it('should compare plain json files', () => {
+      expect(getString(gendiff(filePath1, filePath2))).toEqual(
+        getString(expectedFile),
+      );
+    });
+  });
+
+  describe('yaml', () => {
+    beforeEach(() => {
+      fileName1 = 'plain-yaml1.yaml';
+      fileName2 = 'plain-yaml2.yaml';
+      filePath1 = getFixturePath(fileName1);
+      filePath2 = getFixturePath(fileName2);
+
+      expectedFile = readFile('expected-plain.txt');
+    });
+    it('should compare plain yaml files', () => {
+      expect(getString(gendiff(filePath1, filePath2))).toEqual(
+        getString(expectedFile),
+      );
+    });
+  });
+
+  describe('yml', () => {
+    beforeEach(() => {
+      fileName1 = 'plain-yml1.yml';
+      fileName2 = 'plain-yml2.yml';
+      filePath1 = getFixturePath(fileName1);
+      filePath2 = getFixturePath(fileName2);
+
+      expectedFile = readFile('expected-plain.txt');
+    });
+    it('should compare plain yml files', () => {
       expect(getString(gendiff(filePath1, filePath2))).toEqual(
         getString(expectedFile),
       );
