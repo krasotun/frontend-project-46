@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 const distinctData = (data) => {
   const result = [];
   data.forEach((element) => {
@@ -21,6 +22,15 @@ const comparer = (object1, object2) => {
   const result = keys.map((key) => {
     const value1 = object1[key];
     const value2 = object2[key];
+
+    if (
+      typeof value1 === 'object' &&
+      !Array.isArray(value1) &&
+      typeof value2 === 'object' &&
+      !Array.isArray(value2)
+    ) {
+      return { key, children: comparer(value1, value2), status: 'nested' };
+    }
 
     if (Object.hasOwn(object1, key) && !Object.hasOwn(object2, key)) {
       return {
