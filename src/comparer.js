@@ -1,7 +1,17 @@
+const distinctData = (data) => {
+  const result = [];
+  data.forEach((element) => {
+    if (!result.includes(element)) {
+      result.push(element);
+    }
+  });
+  return result;
+};
+
 const getSortedKeys = (object1, object2) => {
   const object1Keys = Object.keys(object1);
   const object2Keys = Object.keys(object2);
-  const unionKeys = [...object1Keys, ...object2Keys];
+  const unionKeys = distinctData([...object1Keys, ...object2Keys]);
   return unionKeys.sort();
 };
 
@@ -46,7 +56,5 @@ const comparer = (object1, object2) => {
 
   return result;
 };
-
-//   return result.map((element) => element.join(' ')).join('\n');
 
 export default comparer;
