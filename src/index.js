@@ -2,8 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import parse from './parse.js';
 import comparer from './comparer.js';
-import plainFormatter from '../formatters/plain.js';
-import stylishFormatter from '../formatters/stylish.js';
+import setFormatter from '../formatters/index.js';
 
 const getFileType = (filePath) => path.extname(filePath).slice(1);
 const getFilePath = (filePath) => path.resolve(process.cwd(), filePath);
@@ -21,9 +20,7 @@ export default (filePath1, filePath2, options) => {
   const data2 = readFile(path2);
   const parsedData2 = dataParse(data2, ext2);
 
-  if (options === 'stylish') {
-    return stylishFormatter(comparer(parsedData1, parsedData2));
-  }
+  const dataForCompare = comparer(parsedData1, parsedData2);
 
-  return plainFormatter(comparer(parsedData1, parsedData2));
+  return setFormatter(dataForCompare, options);
 };
