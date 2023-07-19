@@ -2,6 +2,7 @@ import plainFormatter from './plain.js';
 import stylishFormatter from './stylish.js';
 import jsonFormatter from './json.js';
 
+// eslint-disable-next-line consistent-return
 export default (data, format) => {
   switch (format) {
     case 'stylish':
@@ -11,6 +12,6 @@ export default (data, format) => {
     case 'json':
       return jsonFormatter(data);
     default:
-      throw new Error(`Unknown ${format}.`);
+      console.log(new Error(`Unknown ${format}.`));
   }
 };
