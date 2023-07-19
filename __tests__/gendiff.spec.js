@@ -22,7 +22,7 @@ describe('#gendiff', () => {
   let filePath2;
   let expectedFile;
 
-  describe('json', () => {
+  describe('json plain', () => {
     beforeEach(() => {
       fileName1 = 'plain-json1.json';
       fileName2 = 'plain-json2.json';
@@ -33,6 +33,22 @@ describe('#gendiff', () => {
     });
     it('should compare plain json files', () => {
       expect(getString(gendiff(filePath1, filePath2))).toEqual(
+        getString(expectedFile),
+      );
+    });
+  });
+
+  describe('json nested', () => {
+    beforeEach(() => {
+      fileName1 = 'deep-json1.json';
+      fileName2 = 'deep-json2.json';
+      filePath1 = getFixturePath(fileName1);
+      filePath2 = getFixturePath(fileName2);
+
+      expectedFile = readFile('expected-deep.txt');
+    });
+    it('should compare nested json files', () => {
+      expect(getString(gendiff(filePath1, filePath2, 'stylish'))).toEqual(
         getString(expectedFile),
       );
     });
