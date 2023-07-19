@@ -45,7 +45,7 @@ describe('#gendiff', () => {
   });
 
   describe('stylish', () => {
-    test.skip.each(files)('stylish format', (file1, file2) => {
+    test.each(files)('stylish format', (file1, file2) => {
       const filepath1 = getFixturePath(file1);
       const filepath2 = getFixturePath(file2);
 
