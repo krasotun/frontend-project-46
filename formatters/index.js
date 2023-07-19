@@ -3,10 +3,8 @@ import stylishFormatter from './stylish.js';
 import jsonFormatter from './json.js';
 
 // eslint-disable-next-line consistent-return
-export default (data, format) => {
+export default (data, format = 'stylish') => {
   switch (format) {
-    case undefined:
-      return stylishFormatter(data);
     case 'stylish':
       return stylishFormatter(data);
     case 'plain':

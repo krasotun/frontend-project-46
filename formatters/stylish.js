@@ -34,7 +34,7 @@ const stylishFormatter = (tree) => {
         case 'added':
           return `${frontIdent}+ ${key}: ${makeString(value2, depth + 1)}`;
         case 'unchanged':
-          return `${frontIdent}  ${key}: ${makeString(value1, depth + 1)}`;
+          return `${frontIdent}   ${key}: ${makeString(value1, depth + 1)}`;
         case 'changed':
           return [
             `${frontIdent}- ${key}: ${makeString(value1, depth + 1)}`,
