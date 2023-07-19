@@ -1,7 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import parse from './parse.js';
-import comparer from './comparer.js';
+import compareFiles from './compare-files.js';
 import setFormatter from '../formatters/index.js';
 
 const getFileType = (filePath) => path.extname(filePath).slice(1);
@@ -20,7 +20,7 @@ export default (filePath1, filePath2, options) => {
   const data2 = readFile(path2);
   const parsedData2 = dataParse(data2, ext2);
 
-  const dataForCompare = comparer(parsedData1, parsedData2);
+  const dataForCompare = compareFiles(parsedData1, parsedData2);
 
   return setFormatter(dataForCompare, options);
 };
