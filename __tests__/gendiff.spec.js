@@ -33,6 +33,17 @@ describe('#gendiff', () => {
     });
   });
 
+  describe('json', () => {
+    test.each(files)('json format', (file1, file2) => {
+      const filepath1 = getFixturePath(file1);
+      const filepath2 = getFixturePath(file2);
+
+      const result = readFile('resultjson.txt');
+
+      expect(gendiff(filepath1, filepath2, 'json')).toEqual(result);
+    });
+  });
+
   describe('stylish', () => {
     test.skip.each(files)('stylish format', (file1, file2) => {
       const filepath1 = getFixturePath(file1);
