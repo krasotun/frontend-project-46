@@ -1,5 +1,5 @@
 /* eslint-disable implicit-arrow-linebreak */
-import { expect, beforeEach } from '@jest/globals';
+import { expect } from '@jest/globals';
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
 import { readFileSync } from 'fs';
@@ -13,76 +13,34 @@ const getFixturePath = (filename) =>
 
 const readFile = (filename) => readFileSync(getFixturePath(filename), 'utf-8');
 
-const getString = (data) => String(data).trim();
+// const getString = (data) => String(data).trim();
+
+const files = [
+  ['filepath1.json', 'filepath2.json'],
+  ['filepath1.yaml', 'filepath2.yaml'],
+  ['filepath1.yml', 'filepath2.yml'],
+];
 
 describe('#gendiff', () => {
-  let fileName1;
-  let fileName2;
-  let filePath1;
-  let filePath2;
-  let expectedFile;
+  describe('plain', () => {
+    test.each(files)('plain format', (file1, file2) => {
+      const filepath1 = getFixturePath(file1);
+      const filepath2 = getFixturePath(file2);
 
-  describe('json plain', () => {
-    beforeEach(() => {
-      fileName1 = 'plain-json1.json';
-      fileName2 = 'plain-json2.json';
-      filePath1 = getFixturePath(fileName1);
-      filePath2 = getFixturePath(fileName2);
+      const result = readFile('resultplain.txt');
 
-      expectedFile = readFile('expected-plain.txt');
-    });
-    it('should compare plain json files', () => {
-      expect(getString(gendiff(filePath1, filePath2, 'stylish'))).toEqual(
-        getString(expectedFile),
-      );
+      expect(gendiff(filepath1, filepath2, 'plain')).toEqual(result);
     });
   });
 
-  describe('json nested', () => {
-    beforeEach(() => {
-      fileName1 = 'deep-json1.json';
-      fileName2 = 'deep-json2.json';
-      filePath1 = getFixturePath(fileName1);
-      filePath2 = getFixturePath(fileName2);
+  describe('stylish', () => {
+    test.skip.each(files)('stylish format', (file1, file2) => {
+      const filepath1 = getFixturePath(file1);
+      const filepath2 = getFixturePath(file2);
 
-      expectedFile = readFile('expected-deep.txt');
-    });
-    it.skip('should compare nested json files', () => {
-      expect(getString(gendiff(filePath1, filePath2, 'stylish'))).toEqual(
-        getString(expectedFile),
-      );
-    });
-  });
+      const result = readFile('resultstylish.txt');
 
-  describe('yaml', () => {
-    beforeEach(() => {
-      fileName1 = 'plain-yaml1.yaml';
-      fileName2 = 'plain-yaml2.yaml';
-      filePath1 = getFixturePath(fileName1);
-      filePath2 = getFixturePath(fileName2);
-
-      expectedFile = readFile('expected-plain.txt');
-    });
-    it('should compare plain yaml files', () => {
-      expect(getString(gendiff(filePath1, filePath2, 'stylish'))).toEqual(
-        getString(expectedFile),
-      );
-    });
-  });
-
-  describe('yml', () => {
-    beforeEach(() => {
-      fileName1 = 'plain-yml1.yml';
-      fileName2 = 'plain-yml2.yml';
-      filePath1 = getFixturePath(fileName1);
-      filePath2 = getFixturePath(fileName2);
-
-      expectedFile = readFile('expected-plain.txt');
-    });
-    it('should compare plain yml files', () => {
-      expect(getString(gendiff(filePath1, filePath2, 'stylish'))).toEqual(
-        getString(expectedFile),
-      );
+      expect(gendiff(filepath1, filepath2, 'stylish')).toEqual(result);
     });
   });
 });
