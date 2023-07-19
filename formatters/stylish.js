@@ -14,7 +14,7 @@ const makeString = (data, depth = 1) => {
   const backIdent = getBackIdent(depth);
   const currentValue = Object.entries(data);
   const lines = currentValue.map(
-    ([key, value]) => `${frontIdent} ${key}: ${makeString(value, depth + 1)}`,
+    ([key, value]) => `${frontIdent}  ${key}: ${makeString(value, depth + 1)}`,
   );
   return ['{', ...lines, `${backIdent}}`].join('\n');
 };
